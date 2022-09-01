@@ -2,28 +2,25 @@
 #include <stdlib.h>
 
 typedef struct no{int dado; struct no* next;}No;
+typedef struct pilha{No* head;}Pilha;
 
-No* push(); void pop(); void printLL();
+void push(); void pop(); Pilha* init(); void peak();
 
 int main(){
-    int opt; No* head = malloc(sizeof(No));
-    No* start = head;
+    int opt; Pilha* pilha = init();
 
     printf("Seja bem-vindo ao criador de linked list 3001.\n\n");
     while (1){
         printf("Qual opereação deseja realizar?\n");
-        printf("[1] Push\n[2] Pop\n[3] Imprimir a lista\n[4] Sair\n\n");
+        printf("[1] Push\n[2] Pop\n[3] Peak\n[4] Sair\n\n");
         scanf("%i", &opt);
         if (opt == 1){
-            //printf("pre %p\n", head);
-            head = push(head);
-            //printf("pos %p\n", head);
+            push(pilha);
         }
         /* else if (opt == 2)
-            //pop(); */
+            pop(); */
         else if (opt == 3){
-            //printf("pre print %p\n", head);
-            printLL(start);
+            peak(pilha);
         } 
         else if (opt == 4)
             exit(0);
@@ -32,19 +29,25 @@ int main(){
     }
 }
 
-No* push(No* head) {
+Pilha* init(){
+    Pilha* pilha = malloc(sizeof(No));      // Inicializa uma pilha
+    pilha->head = NULL;                     // Atribui NULL ao head
+    return pilha;              
+}
+void push(Pilha* pilha) {
     int valor; printf("Digite o valor do nó: ");
     scanf("%i", &valor);
-    head->dado = valor;
-    head->next = malloc(sizeof(No));
-    head = head->next;
-    return head;
+    No* novo = malloc(sizeof(No));          // Aloca um nó
+    novo->dado = valor;                     // Atribui valor ao nó
+    novo->next = pilha->head;               //     ?
+    pilha->head = novo;                     // head é o novo nó
 }
 
-void printLL(No* ptr){
-    int c = 0;
-    while(ptr->next != NULL){
-        printf("Nó %i:\nDado: %i\n\n", c, ptr->dado);
-        c++; ptr = ptr->next;
-    }
+/* void *pop(){
+    
+} */
+
+void peak(Pilha* pilha){
+    printf("Head: %i\n", pilha->head->dado);
+    printf("Endereço: %p\n", pilha->head);
 }

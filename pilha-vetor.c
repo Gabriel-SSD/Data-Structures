@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 // Um vetor comum que é acessado como se fosse uma pilha
-// Last in First 
+// Last in First out
 
 typedef struct dpilha{int info;}Cel;
 
