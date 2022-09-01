@@ -5,7 +5,7 @@ int addFinal(); int addInicio(); int removeNo(); int printLL();
 typedef struct no{int dado; struct no* next;}No;
 
 int main(){
-    int opt; int qtdNo = 0;
+    int opt; int qtdNo = 1;
     No* start = malloc(sizeof(No));
 
     printf("Seja bem-vindo ao criador de linked list 3000.\n\n");
@@ -31,16 +31,16 @@ int main(){
         }
     }
 }
-int addFinal(No* ptr, int* qtdNo){  // Está gerando um nó vazio no meio da lista
+int addFinal(No* ptr, int* qtdNo){
     printf("Digite o valor do nó: ");
     int valor; scanf("%i", &valor);
-    if (*qtdNo >= 1){
+    if (*qtdNo > 1){
         while(ptr->next != NULL)
             ptr = ptr->next;
         ptr->next = malloc(sizeof(No));
-        ptr = ptr->next; ptr->dado = valor;
+        ptr->dado = valor;
     }
-    else if (*qtdNo == 0){
+    else if (*qtdNo == 1){
         ptr->next = malloc(sizeof(No));
         ptr->dado = valor;
     }
