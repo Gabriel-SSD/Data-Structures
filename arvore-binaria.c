@@ -2,57 +2,55 @@
 #include <stdlib.h>
 /* Observações */
 /*
-    * É desperdiçado ou o left ou o right da raiz 
-    * É possível sobrescrever um nó
-    * Não tem função para visualizar a folha
+    - TODO: Implementação função de imprimir
 */
 typedef struct no {
     char info;
     struct no *l;
     struct no *r;
 } No;
-
-No* criaPrimeiroNo(No* ptr){
-    ptr = malloc(sizeof(No));
-    int num; printf("Digite um número para o nó: "); scanf("%i", &num);
-    ptr->info = num;
-    return ptr;
+void insere(int valor, No* ptr){
+    if (valor > ptr->info){
+        if (ptr->r == NULL){
+            ptr->r = malloc(sizeof(No));
+            ptr->r->info = valor;
+            // printf("check");
+        }
+        else {
+            ptr = ptr->r;
+            insere(valor, ptr);
+        }
+    }
+    else if (valor < ptr->info){
+        if (ptr->l == NULL){
+            ptr->l = malloc(sizeof(No));
+            ptr->l->info = valor;
+            // printf("check");
+        }
+        else {
+            ptr = ptr->l;
+            insere(valor, ptr);
+        }
+    }
+    else
+        printf("Valor inválido\n");   
 }
-No* criaEsquerda(No* ptr){
-    ptr->l = malloc(sizeof(No));
-    int num; printf("Digite um número para o nó: "); scanf("%i", &num);
-    ptr->l->info = num;
-    return ptr->l;
-}
-No* criaDireita(No* ptr){
-    ptr->r = malloc(sizeof(No));
-    int num; printf("Digite um número para o nó: "); scanf("%i", &num);
-    ptr->r->info = num;
-    return ptr->r;
-}
-
 int main() {
-    No* raiz;
-    No* folha;
+    No* raiz = malloc(sizeof(No));
     while (1){
-        printf("Qual operação você deseja fazer?\n");
-        printf("[1] Primeiro Nó\n[2] Criar nó na esquerda\n[3] Criar nó na direita\n");
-        int var; scanf("%i", &var);
-        if (var == 1){
-            //printf("%p\n", raiz);
-            raiz = criaPrimeiroNo(raiz); folha = raiz;
-            printf("%p\n", raiz);
-            //printf("%i\n", folha->info);
-            //printf("%i\n", raiz->info);
+        printf("[1] Inserir novo nó\n[2] Imprimir árvore\n[3] Sair\n");  
+        int opt; scanf("%i", &opt);
+        if (opt==1){
+            printf("Digite o valor do nó a ser inserido: ");
+            int temp; scanf("%i", &temp);
+            insere(temp, raiz);
         }
-        else if (var == 2){
-            folha = criaEsquerda(folha);
-            //printf("%i\n", raiz->info);
-            //printf("%i\n", folha->info);
-        }
-         else if (var == 3){
-            folha = criaDireita(folha);
-        }
+        /* else if (opt==2){
+            imprime();
+        }*/
+        else if (opt==3){
+            exit(1);
+        }       
         else
             printf("Opção inválida. Digite um número entre 1 e 3\n");
     }
