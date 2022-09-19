@@ -1,9 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-/* Observações */
-/*
-    - TODO: Implementação função de remover
-*/
+
+//    - TODO: Implementar função pop
+
 typedef struct no {
     char info;
     struct no *l;
@@ -24,7 +23,6 @@ void insere(int valor, No* ptr){
         if (ptr->r == NULL){
             ptr->r = malloc(sizeof(No));
             ptr->r->info = valor;
-            // printf("check");
         }
         else {
             ptr = ptr->r;
