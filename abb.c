@@ -2,38 +2,57 @@
 #include <stdlib.h>
 
 //    - TODO: Implementar função pop
-//          : Implementar função de busca
 
 typedef struct no {
     char info;
     struct no *l;
     struct no *r;
 } No;
-/* void pop(No* ptr, int info){
-
-} */
-int busca (No* ptr, int info){
+No* busca (No* ptr, int info){
     while(ptr->info != info){
         if (info > ptr->info)
             ptr = ptr->r;
         else
             ptr = ptr->l;
         if (ptr == NULL)
-            return 0;
+            return ptr;
     }
-    return 1;
+    return ptr;
+}
+void pop(No* ptr, int info){
+    No* pont =  busca(ptr, info);
+    if ((pont->r == NULL) && (pont->l == NULL))
+        free(pont);
+    /* else if ((pont->r == NULL) || (pont->l == NULL)){
+        if (pont->r == NULL){
+            pont->info = pont->l->info;
+            pont->r = pont->r->r;
+            No* ptrtemp = pont->l->l;
+            free(pont->l);
+            pont->l = ptrtemp;
+        }
+        else{
+            pont->info = pont->r->info;
+            pont->l = pont->l->l;
+            No* ptrtemp = pont->r->r;
+            free(pont->r);
+            pont->r = ptrtemp;
+        }
+    } */
 }
 void imprime(No* ptr, int tab){
     for (int i = 0; i<tab;i++)
         printf("-");
     if (ptr != NULL){
         printf("%i\n", ptr->info);
-        imprime(ptr->l, tab+2);
+        imprime(ptr->l, tab+tab);
         printf("\n");
-        imprime(ptr->r, tab+2);
+        imprime(ptr->r, tab+tab);
     } else printf("NULL");
 }
 void insere(int valor, No* ptr){
+    if (ptr->info == 0)             // Primeira inserção, que é a da raiz
+        ptr->info = valor;         
     if (valor > ptr->info){
         if (ptr->r == NULL){
             ptr->r = malloc(sizeof(No));
@@ -48,7 +67,6 @@ void insere(int valor, No* ptr){
         if (ptr->l == NULL){
             ptr->l = malloc(sizeof(No));
             ptr->l->info = valor;
-            // printf("check");
         }
         else {
             ptr = ptr->l;
@@ -69,10 +87,14 @@ int main() {
             insere(temp, raiz);
         }
         else if (opt==2)
-            imprime(raiz, 2);
+            imprime(raiz, 4);
         else if (opt==3){
             printf("Digite o nó que deseja achar: "); int tmpno; scanf("%i", &tmpno);
-            printf("%i", busca(raiz, tmpno));
+            printf("O nó está em: %p\n", busca(raiz, tmpno));
+        }
+        else if (opt==4){
+            printf("Digite o valor do nó a ser excluído: "); int tmpno; scanf("%i", &tmpno);
+            pop(raiz, tmpno);
         }
         else if (opt==5)
             exit(0);      
