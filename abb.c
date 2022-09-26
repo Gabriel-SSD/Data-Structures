@@ -2,12 +2,27 @@
 #include <stdlib.h>
 
 //    - TODO: Implementar função pop
+//          : Implementar função de busca
 
 typedef struct no {
     char info;
     struct no *l;
     struct no *r;
 } No;
+/* void pop(No* ptr, int info){
+
+} */
+int busca (No* ptr, int info){
+    while(ptr->info != info){
+        if (info > ptr->info)
+            ptr = ptr->r;
+        else
+            ptr = ptr->l;
+        if (ptr == NULL)
+            return 0;
+    }
+    return 1;
+}
 void imprime(No* ptr, int tab){
     for (int i = 0; i<tab;i++)
         printf("-");
@@ -46,7 +61,7 @@ void insere(int valor, No* ptr){
 int main() {
     No* raiz = malloc(sizeof(No));
     while (1){
-        printf("\n[1] Inserir novo nó\n[2] Imprimir árvore\n[3] Sair\n");  
+        printf("\n[1] Inserir novo nó\n[2] Imprimir árvore\n[3] Buscar nó\n[4] Excluir nó\n[5] Sair\n");  
         int opt; scanf("%i", &opt);
         if (opt==1){
             printf("Digite o valor do nó a ser inserido: ");
@@ -55,7 +70,11 @@ int main() {
         }
         else if (opt==2)
             imprime(raiz, 2);
-        else if (opt==3)
+        else if (opt==3){
+            printf("Digite o nó que deseja achar: "); int tmpno; scanf("%i", &tmpno);
+            printf("%i", busca(raiz, tmpno));
+        }
+        else if (opt==5)
             exit(0);      
         else
             printf("Opção inválida. Digite um número entre 1 e 3\n");
