@@ -15,15 +15,17 @@ No* busca (No* ptr, int info){
         else
             ptr = ptr->l;
         if (ptr == NULL)
-            return ptr;
+            return NULL;
     }
     return ptr;
 }
 void pop(No* ptr, int info){
     No* pont =  busca(ptr, info);
+    if (pont == NULL)
+        exit(-1);
     if ((pont->r == NULL) && (pont->l == NULL))
         free(pont);
-    /* else if ((pont->r == NULL) || (pont->l == NULL)){
+   /*  else if ((pont->r == NULL) || (pont->l == NULL)){
         if (pont->r == NULL){
             pont->info = pont->l->info;
             pont->r = pont->r->r;
