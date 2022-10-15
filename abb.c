@@ -24,23 +24,21 @@ void pop(No* ptr, int info){
     if (pont == NULL)
         exit(-1);
     if ((pont->r == NULL) && (pont->l == NULL))
-        free(pont);
-   /*  else if ((pont->r == NULL) || (pont->l == NULL)){
+        pont->info = 0;
+	//Linha de baixo gera segmentation fault, a solução na linha de cima não desaloca espaço em memória, mas é o código continua funcional
+    	//free(pont)	
+    else if ((pont->r == NULL) || (pont->l == NULL)){
         if (pont->r == NULL){
             pont->info = pont->l->info;
-            pont->r = pont->r->r;
             No* ptrtemp = pont->l->l;
-            free(pont->l);
             pont->l = ptrtemp;
         }
         else{
             pont->info = pont->r->info;
-            pont->l = pont->l->l;
             No* ptrtemp = pont->r->r;
-            free(pont->r);
             pont->r = ptrtemp;
         }
-    } */
+    }
 }
 void imprime(No* ptr, int tab){
     for (int i = 0; i<tab;i++)
