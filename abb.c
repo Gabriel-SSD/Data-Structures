@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-//    - TODO: Implementar função pop
+//    - TODO: Implementar o terceiro caso de pop em abb
 
 typedef struct no {
     char info;
@@ -38,6 +38,9 @@ void pop(No* ptr, int info){
             No* ptrtemp = pont->r->r;
             pont->r = ptrtemp;
         }
+    }
+    else{
+
     }
 }
 void imprime(No* ptr, int tab){
