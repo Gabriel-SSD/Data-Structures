@@ -1,10 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
+
+// Implementação simples de fila, utilizando vetores.
+//
+
 void imprime(int* inicio, int* fim){
-	while(inicio<=fim){
+	while(inicio<fim){
 		printf("%i->",*inicio);
 		inicio+=1;
 	}
+	if (inicio == fim) {printf("%i\n\n", *inicio); inicio+=1;}
+	else printf("Fila vazia\n\n");
 }
 int main(){
 	int fila[10]; int* start; int* end;
@@ -17,8 +23,11 @@ int main(){
 		printf("Qual operação deseja realizar?\n[1] Diminuir 1 da fila\n[2] Imprimir lista\n[3] Sair\n");
 		int opt; scanf("%i", &opt);
 		if (opt == 1){
-			printf("O %i estava mais tempo na fila, por isso foi liberado\n\n", *start);
-		start += 1;
+			if (start>end) printf("Fila vazia\n\n");
+			else{
+				printf("O %i estava mais tempo na fila, por isso foi liberado\n\n", *start);
+				start += 1;
+			}
 		}
 		else if (opt == 2)
 			imprime(start, end);
