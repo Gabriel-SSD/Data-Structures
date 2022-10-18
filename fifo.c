@@ -2,7 +2,6 @@
 #include <stdlib.h>
 
 // Implementação simples de fila, utilizando vetores.
-//
 
 void imprime(int* inicio, int* fim){
 	while(inicio<fim){
